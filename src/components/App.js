@@ -9,7 +9,7 @@ const style = {
 const calcIt = (calc) => {
   const result = 0;
   // check if the array which was given is valid
-  for (let i = 0; i++; i<calc.length) {
+  for (let i = 0; i++; i<calc.length - 1) {
     if (i % 2 === 0) {
       if (typeof calc[i] !== 'number') { return 'error'; }
     }
@@ -26,11 +26,26 @@ function App() {
   const [calc, setCalc] = useState([]);
   console.log(calc)
 
-  const onNumberClick = (number) => {
+  const onNumberClick = (num) => {
     if (typeof prompt == 'number') {
-      setPrompt(prompt * 10 + number);
+      setPrompt(prompt * 10 + num);
+    } else if (typeof prompt == 'string') {
+      if (prompt[prompt.length - 1] === '.') {
+        setPrompt(Number(prompt + num));
+      }
+      else {
+        setPrompt(num);
+      }
     } else {
-      setPrompt(number);
+      setPrompt(num);
+    }
+  }
+
+  const onDecimalClick = () => {
+    if (typeof prompt == 'number') {
+      setPrompt(String(prompt) + '.')
+    } else {
+      setPrompt('.');
     }
   }
 
@@ -40,10 +55,16 @@ function App() {
       setPrompt(operator);
     }
     else if (typeof prompt == 'string') {
-      const new_calc = calc.slice();
-      new_calc.pop();
-      setCalc([...new_calc, operator]);
-      setPrompt(operator);
+      if (prompt[prompt.length - 1] === '.') {
+        const new_prompt = Number(prompt + '0');
+        setCalc([...calc, new_prompt, operator]);
+        setPrompt(operator);
+      } else {
+        const new_calc = calc.slice();
+        new_calc.pop();
+        setCalc([...new_calc, operator]);
+        setPrompt(operator);
+      }
     }
   }
 
@@ -88,7 +109,7 @@ function App() {
         <Button value={"/"} onClick={onOperatorClick} />
       </div>
       <div>
-        <Button value={"."} onClick={onNumberClick} />
+        <Button value={"."} onClick={onDecimalClick} />
         <Button value={0} onClick={onNumberClick} />
         <Button value={"="} onClick={onEqualsClick} />
         <Button value={"*"} onClick={onOperatorClick} />
