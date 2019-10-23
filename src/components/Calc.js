@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ButtonRow from './ButtonRow';
 import Screen from './Screen';
 import calculate from './calculate';
-import './style.css';
+import './calc.css';
 
 const Calc = () => {
   const [prompt, setPrompt] = useState(0);
@@ -30,10 +30,7 @@ const Calc = () => {
           setPrompt(Number(prompt + num));
           break;
         }
-        else {
-          setPrompt(num);
-          break;
-        }
+        // eslint-disable-next-line
       default:
         setPrompt(num);
     }
@@ -41,10 +38,10 @@ const Calc = () => {
   };
 
   const onDecimalClick = () => {
-    if (typeof prompt == 'number') {
-      setPrompt(String(prompt) + '.')
-    } else if (lastCharacter === '.') {
+    if (lastCharacter === '.') {
       return;
+    } else if (typeof prompt == 'number') {
+      setPrompt(String(prompt) + '.')
     } else {
       setPrompt('.');
     }
