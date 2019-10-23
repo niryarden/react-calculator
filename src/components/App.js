@@ -3,9 +3,7 @@ import Calc from './Calc';
 
 const App = () => {
   return (
-    <div>
       <Calc />
-    </div>
   );
 }
 

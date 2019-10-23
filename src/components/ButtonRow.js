@@ -1,11 +1,17 @@
 import React from 'react';
-import Button from './Button';
+import './calc.css';
 
-const ButtonRow = (props) => {
+const ButtonRow = ({items}) => {
     return (
-        props.items.map((item) => {
-            return <Button value={item.value} onClick={item.onClick} key={item.value} />;
-        })
+        <div>
+            {items.map((item) => {
+                return ( 
+                <button onClick={() => item.onClick(item.value)} key={item.value}>
+                    {item.value}
+                </button>
+                );
+            })}
+        </div>
     );
 };
 
