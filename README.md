@@ -1,3 +1,3 @@
-# Calculator
+# react-Calculator
 
-React based calculator i've built for practice
+Simple React-based calculator i've built for practice
